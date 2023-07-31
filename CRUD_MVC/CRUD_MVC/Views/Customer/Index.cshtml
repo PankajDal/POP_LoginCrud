@@ -1,0 +1,93 @@
+﻿@model IEnumerable<CRUD_MVC.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Index</h1>
+
+@*<div style="text-align:left">
+    <div class="col-6 float:left">
+    <a asp-action="AddProduct" class="btn btn-dark" asp-controller="Product">Add New Product</a>
+    </div>
+</div>
+
+    <div style="text-align:right">
+       <div class="col-6 float:right">
+        <a asp-action="CreateAdmin" class="btn btn-dark">Add New Customer</a>
+       </div>
+    </div>*@
+
+<div style="text-align:right">
+    <div class="col-6 float:right">
+    <a asp-action="AddProduct" class="btn btn-dark" asp-controller="Product">Add New Product</a>
+    </div>
+</div>
+    <div style="text-align:left">
+    <div class="col-6 float:left">
+        <a asp-action="CreateAdmin" class="btn btn-dark" asp-controller="Customer">Add New Customer</a>
+    </div>
+  </div>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerEmailID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerPhoneNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerPassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerRole)
+            </th>
+          
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerEmailID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerPhoneNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerPassword)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerRole)
+            </td>
+            
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.CustomerID })" class="btn btn-primary">Edit</a> |
+                    <a href="@Url.Action("Details", new { id = item.CustomerID })" class="btn btn-info">Details</a> |
+                    <a href="@Url.Action("Delete", new { id = item.CustomerID })" class="btn btn-danger">Delete</a>
+                </td>
+
+        </tr>
+}
+    </tbody>
+</table>
+<div style="text-align: right">
+    <a class="btn btn-outline-danger" asp-action="LogOut" Asp-Controller="Customer">
+        <h3>Log Out</h3>
+    </a>
+</div>

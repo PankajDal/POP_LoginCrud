@@ -1,0 +1,38 @@
+﻿@model CRUD_MVC.Models.UserLogin
+
+@{
+    ViewData["Title"] = "Logout";
+}
+
+<h1>Logout</h1>
+
+<h4>UserLogin</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Logout">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CustomerEmailID" class="control-label"></label>
+                <input asp-for="CustomerEmailID" class="form-control" />
+                <span asp-validation-for="CustomerEmailID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustostomerPassword" class="control-label"></label>
+                <input asp-for="CustostomerPassword" class="form-control" />
+                <span asp-validation-for="CustostomerPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,386 @@
+﻿
+@model IEnumerable<CRUD_MVC.Models.Product>
+
+@{
+    ViewData["Title"] = "ProductList";
+}
+<h1>ProductList</h1>
+
+<form method="get" action="/Product/ProductList" class="mb-3">
+    <div class="input-group">
+        <input type="text" class=".custom-search-box" name="searchTerm" placeholder="Search products">
+        <div class="input-group-append">
+            <button class="btn btn-primary btn-lg" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+
+<div class="table-responsive">
+    <form method="post" action="/Product/InvoiceCostList">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Product ID</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Product Price</th>
+                    <th scope="col">ProductImage</th>
+                 
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ProductID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ProductPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ProductImage)</td>
+                      
+                        <td> 
+                            <input type="checkbox" name="selectedProducts" value="@item.ProductID" />
+                           <div class="input-group">@*
+                                <input type="number" name="quantities[@item.ProductID]" class="form-control" min="0" max="100" value="0" />*@
+                                <div>
+                                    <h3>@item.ProductName</h3>
+                                    <p>Price: @item.ProductPrice</p>
+
+                                    @if (item.ProductImage != null)
+                                    {
+                                        <img src="data:image/png;base64,@Convert.ToBase64String(item.ProductImage)" alt="Product Image" />
+                                    }
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
+        <td colspan="5">
+            <button type="submit" class="btn btn-outline-primary rounded">Submit</button>
+
+            <button type="submit" class="btn btn-outline-primary rounded" a asp-action="ProductList">Back</button>
+        </td>
+    </form>
+</div>
+
+<style>
+    .custom-search-box {
+        max-width:100px
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ... (existing code) ... -->
+@*@model IEnumerable<CRUD_MVC.Models.Product>
+
+@{
+    ViewData["Title"] = "ProductList";
+}
+<h1>ProductList</h1>
+
+<form method="get" action="/Product/ProductList" class="mb-3">
+    <div class="input-group">
+        <input type="text" class=".custom-search-box" name="searchTerm" placeholder="Search products">
+        <div class="input-group-append">
+            <button class="btn btn-primary btn-lg" type="submit">Search</button>
+        </div>
+    </div>   
+</form>
+<div class="table-responsive">
+    <form method="post" action="/Product/InvoiceCostList">
+       
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Product ID</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Product Price</th>
+                    @*<th scope="col">Valid Date</th>*@
+                    @*<th scope="col">Quantity</th>*@
+
+               @* </tr>
+            </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                  
+                        <td>@Html.DisplayFor(modelItem => item.ProductID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ProductPrice)</td>
+                        @*<td>@Html.DisplayFor(modelItem => item.ValidDate)</td>*@
+                       @* <td>@Html.DisplayFor(modelItem => item.Quantity)</td>*@
+                   
+                        <td>
+                       @* <input type="checkbox" name="selectedProducts" value="@item.ProductID" />
+                        <div class="input-group">
+                            <input type="number" name="quantities[@item.ProductID]" class="form-control" min="0" max="100" value="0" />
+                            <div class="input-group-append">
+                                @*<button type="button" onclick="incrementQuantity(@item.ProductID)">+</button>
+                                <button type="button" onclick="decrementQuantity(@item.ProductID)">-</button>*@
+                            @*</div>
+                        </div>
+                        <td>
+                            <input type="checkbox" name="selectedProducts" value="@item.ProductID" />
+                            <div class="input-group">
+                                <input type="number" name="quantities[@item.ProductID]" class="form-control" min="0" max="100" value="0" />
+                                <div class="input-group-append">
+                                 
+                                </div>
+                            </div>
+                        </td>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        </table>
+
+        <td colspan="5">
+            <button type="submit" class="btn btn-outline-primary rounded">Submit</button>
+
+            <button type="button" class="btn btn-outline-primary rounded" onclick="window.location.href='@Url.Action("ProductList")'">Back</button>
+        </td>
+    </form>
+</div>
+ 
+
+<script>
+    const quantities = {};
+
+    function incrementQuantity(productId) {
+        const inputElement = document.querySelector(`input[name="quantities[${productId}]"]`);
+        inputElement.value = Math.min(parseInt(inputElement.value) + 1, 100);
+        quantities[productId] = parseInt(inputElement.value);
+    }
+
+    function decrementQuantity(productId) {
+        const inputElement = document.querySelector(`input[name="quantities[${productId}]"]`);
+        inputElement.value = Math.max(parseInt(inputElement.value) - 1, 0);
+        quantities[productId] = parseInt(inputElement.value);
+    }
+</script>
+
+*@
+
+
+  @*  @model IEnumerable<CRUD_MVC.Models.Product>
+    @{
+        ViewData["Title"] = "ProductList";
+        var currentPage = ViewBag.CurrentPage ?? 1;
+        var pageSize = 5; // Number of products to display per page
+        var totalProducts = Model.Count();
+        var totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
+        var pagedProducts = Model.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+    }
+    <h1>Product List</h1>
+
+    <form method="get" action="/Product/ProductList" class="mb-3">
+        <div class="input-group">
+            <input type="text" class="form-control custom-search-box" name="searchTerm" placeholder="Search products">
+            <div class="input-group-append">
+                <button class="btn btn-primary btn-lg" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <form method="post" action="/Product/InvoiceCostList">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Product ID</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Product Price</th>
+                        <th scope="col">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in pagedProducts)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.ProductID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductPrice)</td>
+                            <td>
+                                <input type="checkbox" name="selectedProducts" value="@item.ProductID" />
+                                <div class="input-group">
+                                    <input type="number" name="quantities[@item.ProductID]" class="form-control" min="0" max="100" value="0" />
+                                    <div class="input-group-append">
+                                        <!-- Add any additional buttons or controls here -->
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    @if (totalPages > 1)
+                    {
+                        var prevDisabled = currentPage == 1 ? "disabled" : "";
+                        var nextDisabled = currentPage == totalPages ? "disabled" : "";
+                        <li class="page-item @prevDisabled">
+                            <a class="page-link" href="?currentPage=@(currentPage - 1)">Previous</a>
+                        </li>
+                        @for (int i = 1; i <= totalPages; i++)
+                        {
+                            var active = currentPage == i ? "active" : "";
+                            <li class="page-item @active">
+                                <a class="page-link" href="?currentPage=@i">@i</a>
+                            </li>
+                        }
+                        <li class="page-item @nextDisabled">
+                            <a class="page-link" href="?currentPage=@(currentPage + 1)">Next</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a asp-action="ProductList" class="btn btn-secondary">Back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    @section Scripts {
+        <script>
+            // Add any client-side scripts here, if needed
+        </script>
+    }
+@*
+
+                    @model IEnumerable<CRUD_MVC.Models.Product>
+
+@{
+    ViewData["Title"] = "ProductList";
+    var currentPage = ViewBag.CurrentPage ?? 1;
+    var pageSize = 5; // Number of products to display per page
+    var totalProducts = Model.Count();
+    var totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
+    var pagedProducts = Model.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+}
+
+<h1>Product List</h1>
+
+<form method="get" action="/Product/ProductList" class="mb-3">
+    <!-- Rest of the form code remains the same -->
+</form>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <!-- Table header -->
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Product ID</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Product Price</th>
+                <!-- Add other columns here -->
+            </tr>
+        </thead>
+        <!-- Table body -->
+        <tbody>
+            @foreach (var item in pagedProducts)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ProductID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ProductPrice)</td>
+                    <!-- Add other columns here -->
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            @if (totalPages > 1)
+            {
+                var prevDisabled = currentPage == 1 ? "disabled" : "";
+                var nextDisabled = currentPage == totalPages ? "disabled" : "";
+                <li class="page-item @prevDisabled">
+                    <a class="page-link" href="?currentPage=@(currentPage - 1)">Previous</a>
+                </li>
+                @for (int i = 1; i <= totalPages; i++)
+                {
+                    var active = currentPage == i ? "active" : "";
+                    <li class="page-item @active">
+                        <a class="page-link" href="?currentPage=@i">@i</a>
+                    </li>
+                }
+                <li class="page-item @nextDisabled">
+                    <a class="page-link" href="?currentPage=@(currentPage + 1)">Next</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+@section Scripts {
+    <!-- Rest of the scripts section remains the same -->
+}*@

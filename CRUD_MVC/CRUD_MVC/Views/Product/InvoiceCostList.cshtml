@@ -1,0 +1,130 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*@model List<CRUD_MVC.Models.Product>
+@{
+    ViewData["Title"] = "InvoiceCostList";
+    decimal grandTotal = Model.Sum(product => product.ProductPrice * product.Quantity);
+}
+<h3>Product Invoive</h3>
+<h5>Customer Name =@ViewBag.Name</h5>
+<h5>Customer Pnone No=@ViewBag.PhoneNo</h4>
+<h5>Customer Email=@ViewBag.Email</h5>
+
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Product ID</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Product Price</th>
+          @*  <th scope="col">Valid Date</th>*@
+           @** <th scope="col">Quantity</th>
+            <th scope="col">Total Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.ProductID</td>
+                <td>@product.ProductName</td>
+                <td>@product.ProductPrice</td>
+               @* <td>@product.ValidDate</td>
+                <td>@product.Quantity</td>
+                <td>@(product.ProductPrice * product.Quantity)</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="4">Grand Total</th>
+            <th style="text-align: left;">@grandTotal</th>
+
+        </tr>
+    </tfoot>
+</table>
+
+<a asp-action="ProductList" class="btn btn-primary">Back</a>
+*@
+@model List<CRUD_MVC.Models.Product>
+@{
+    ViewData["Title"] = "InvoiceCostList";
+    decimal grandTotal = Model.Sum(product => product.ProductPrice * product.Quantity);
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 30px;
+        }
+
+        h3 {
+            margin-bottom: 20px;
+        }
+
+        .customer-info {
+            margin-bottom: 30px;
+        }
+
+        .grand-total {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Product Invoice</h3>
+        <div class="row customer-info">
+            <div class="col-md-6">
+                <h5>Customer Name: @ViewBag.Name</h5>
+                <h5>Customer Phone No: @ViewBag.PhoneNo</h5>
+                <h5>Customer Email: @ViewBag.Email</h5>
+            </div>
+        </div>
+        <hr />
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Product ID</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Product Price</th>
+                    @*<th scope="col">Valid Date</th>*@
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.ProductID</td>
+                        <td>@product.ProductName</td>
+                        <td>@product.ProductPrice</td>
+                        @*<td>@product.ValidDate</td>*@
+                        <td>@product.Quantity</td>
+                        <td>@(product.ProductPrice * product.Quantity)</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="4">Grand Total</th>
+                    <th class="grand-total">@grandTotal</th>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <a asp-action="ProductList" class="btn btn-primary">Back</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

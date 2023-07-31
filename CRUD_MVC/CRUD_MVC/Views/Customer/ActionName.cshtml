@@ -1,0 +1,76 @@
+﻿@model IEnumerable<CRUD_MVC.Models.Customer>
+
+@{
+    ViewData["Title"] = "ActionName";
+}
+
+<h1>ActionName</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <form action="/ControllerName/ActionName" method="GET">
+        <input type="text" name="searchQuery" placeholder="Search..." /> 
+        <button type="submit">Search</button>
+    </form>
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerEmailID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerPhoneNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerPassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerRole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerEmailID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerPhoneNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerPassword)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerRole)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
