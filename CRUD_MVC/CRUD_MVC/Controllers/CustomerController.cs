@@ -28,6 +28,7 @@ namespace CRUD_MVC.Controllers
             return View(C);
         }
 
+        // Create method Customer 
         [HttpGet]
         public IActionResult CreateAdmin()
         {
