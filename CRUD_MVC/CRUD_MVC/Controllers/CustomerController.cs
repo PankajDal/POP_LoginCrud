@@ -10,7 +10,7 @@ namespace CRUD_MVC.Controllers
     public class CustomerController : Controller
     {
         private readonly CustomerContext _context;
-
+        //Customer Opration
         public CustomerController(CustomerContext context)
         {
             _context = context;
