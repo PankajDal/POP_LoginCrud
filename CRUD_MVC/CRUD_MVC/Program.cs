@@ -16,7 +16,7 @@ InvalidOperationException("Connection string 'CRUDDotnet_6_EntityContext' not fo
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.hjfvyufbgv
+// Configure the HTTP request pipeline
 
 if (!app.Environment.IsDevelopment())
 {

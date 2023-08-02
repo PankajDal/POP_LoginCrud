@@ -70,8 +70,7 @@ namespace CRUD_MVC.Controllers
                 .Where(p => selectedProducts.Contains(p.ProductID))
                 .ToList();
             return View(selectedProductList);
-            //sreturn View(CurrentCustomer);
-
+        
         }
 
         [HttpGet]
